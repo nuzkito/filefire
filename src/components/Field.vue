@@ -14,3 +14,9 @@
         },
     };
 </script>
+
+<style scoped>
+    label {
+        display: block;
+    }
+</style>

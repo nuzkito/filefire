@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="fields-container">
         <Field label="Nombre del campo" :value="field.name" @change="changeName" />
         <Field label="Posición de inicio" :value="field.startPosition" @change="changeStartPosition" />
         <Field label="Tamaño" :value="field.size" @change="changeSize" />
@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import Field from './Field.vue'
+    import Field from './Field.vue';
 
     export default {
         name: 'FixedLengthField',
@@ -39,3 +39,11 @@
         },
     };
 </script>
+
+<style scoped>
+    .fields-container {
+        display: flex;
+        flex-direction: column;
+        margin: .5em;
+    }
+</style>
