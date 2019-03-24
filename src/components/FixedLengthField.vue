@@ -1,8 +1,8 @@
 <template>
     <div>
-        <Field label="Nombre del campo" :value="field.name" v-on:change="changeName" />
-        <Field label="Posición de inicio" :value="field.startPosition" v-on:change="changeStartPosition" />
-        <Field label="Tamaño" :value="field.size" v-on:change="changeSize" />
+        <Field label="Nombre del campo" :value="field.name" @change="changeName" />
+        <Field label="Posición de inicio" :value="field.startPosition" @change="changeStartPosition" />
+        <Field label="Tamaño" :value="field.size" @change="changeSize" />
     </div>
 </template>
 
@@ -13,16 +13,22 @@
         name: 'FixedLengthField',
         methods: {
             changeName(name) {
-                this.field.name = name;
-                this.$emit('change-field', this.field);
+                this.$store.commit('editField', {
+                    ...this.field,
+                    name,
+                });
             },
             changeStartPosition(position) {
-                this.field.startPosition = Number(position);
-                this.$emit('change-field', this.field);
+                this.$store.commit('editField', {
+                    ...this.field,
+                    startPosition: Number(position),
+                });
             },
             changeSize(size) {
-                this.field.size = Number(size);
-                this.$emit('change-field', this.field);
+                this.$store.commit('editField', {
+                    ...this.field,
+                    size: Number(size),
+                });
             },
         },
         props: {

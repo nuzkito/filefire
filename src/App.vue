@@ -1,62 +1,34 @@
 <template>
   <div id="app">
-    <Form :fields="fields" :fileContent="fileContent" v-on:add-field="addField" v-on:change-field="onChangeField" v-on:change-file-content="changeFileContent" />
+    <Form :fields="fields" :fileContent="fileContent" />
     <TableResult :fields="fields" :fileContent="fileContent" />
   </div>
 </template>
 
 <script>
-    import uniqid from 'uniqid';
-    import Form from './components/Form.vue'
-    import TableResult from './components/TableResult.vue'
+    import Form from './components/Form.vue';
+    import TableResult from './components/TableResult.vue';
 
     export default {
         name: 'app',
-        data() {
-            return {
-                fields: [],
-                fileContent: '',
-            }
-        },
-        methods: {
-            addField() {
-                this.fields.push({
-                    id: uniqid(),
-                    name: 'Nombre del campo',
-                    startPosition: 1,
-                    size: 1,
-                });
-                localStorage.setItem('fields', JSON.stringify(this.fields));
+        computed: {
+            fields() {
+                return this.$store.state.fields;
             },
-            onChangeField(editedField) {
-                const fields = this.fields;
-                const index = this.fields.findIndex(function(field) {
-                    return field.id === editedField.id
-                });
-                fields[index] = editedField;
-                this.fields = fields;
-                localStorage.setItem('fields', JSON.stringify(this.fields));
-            },
-            changeFileContent(fileContent) {
-                this.fileContent = fileContent;
-                localStorage.setItem('fileContent', fileContent);
+            fileContent() {
+                return this.$store.state.fileContent;
             },
         },
         created() {
-            const fields = JSON.parse(localStorage.getItem('fields'));
-            if (fields) {
-                this.fields = fields;
-            } else {
-                this.addField();
+            if (this.$store.state.fields.length === 0) {
+                this.$store.commit('addNewField');
             }
-
-            this.fileContent = localStorage.getItem('fileContent') || '';
         },
         components: {
             Form,
-            TableResult
-        }
-    }
+            TableResult,
+        },
+    };
 </script>
 
 <style>

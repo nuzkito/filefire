@@ -1,7 +1,7 @@
 <template>
     <div>
         <label :for="label">{{ label }}</label>
-        <input type="text" :id="label" :value="value" v-on:keyup="$emit('change', $event.target.value)">
+        <input type="text" :id="label" :value="value" @keyup="$emit('change', $event.target.value)">
     </div>
 </template>
 

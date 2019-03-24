@@ -1,15 +1,15 @@
 <template>
     <form>
-        <FixedLengthField v-for="(field, key) in fields" :key="key" :field="field" v-on:change-field="changeField" />
-        <button type="button" v-on:click="$emit('add-field')">Añadir campo</button>
+        <FixedLengthField v-for="(field, key) in fields" :key="key" :field="field" />
+        <button type="button" @click="addNewField">Añadir campo</button>
         <div>
-            <textarea cols="80" rows="10" :value="fileContent" v-on:keyup="$emit('change-file-content', $event.target.value)"></textarea>
+            <textarea cols="80" rows="10" :value="fileContent" @keyup="editFileContent"></textarea>
         </div>
     </form>
 </template>
 
 <script>
-    import FixedLengthField from './FixedLengthField.vue'
+    import FixedLengthField from './FixedLengthField.vue';
 
     export default {
         name: 'Form',
@@ -18,12 +18,15 @@
             fileContent: String,
         },
         methods: {
-            changeField(field) {
-                this.$emit('change-field', field);
+            addNewField() {
+                this.$store.commit('addNewField');
+            },
+            editFileContent(event) {
+                this.$store.commit('editFileContent', event.target.value);
             },
         },
         components: {
-            FixedLengthField
-        }
-    }
+            FixedLengthField,
+        },
+    };
 </script>
