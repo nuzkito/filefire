@@ -26,10 +26,17 @@ export default new Vuex.Store({
             state.fields.splice(index, 1, editedField);
             localStorage.setItem('fields', JSON.stringify(state.fields));
         },
+        deleteField(state, deletingField) {
+            const index = state.fields.findIndex(function(field) {
+                return field.id === deletingField.id;
+            });
+            state.fields.splice(index, 1);
+            localStorage.setItem('fields', JSON.stringify(state.fields));
+        },
         editFileContent(state, fileContent) {
             state.fileContent = fileContent;
             localStorage.setItem('fileContent', fileContent);
-        }
+        },
     },
     actions: {
 

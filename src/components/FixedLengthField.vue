@@ -3,6 +3,7 @@
         <Field label="Nombre del campo" :value="field.name" @change="changeName" />
         <Field label="Posición de inicio" :value="field.startPosition" @change="changeStartPosition" />
         <Field label="Tamaño" :value="field.size" @change="changeSize" />
+        <button type="button" @click="deleteField">Eliminar</button>
     </div>
 </template>
 
@@ -29,6 +30,9 @@
                     ...this.field,
                     size: Number(size),
                 });
+            },
+            deleteField() {
+                this.$store.commit('deleteField', this.field);
             },
         },
         props: {
