@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Form :fields="fields" :fileContent="fileContent" />
-    <TableResult :fields="fields" :fileContent="fileContent" />
+    <Form :files="files" />
+    <TableResult :files="files" />
   </div>
 </template>
 
@@ -12,16 +12,13 @@
     export default {
         name: 'app',
         computed: {
-            fields() {
-                return this.$store.state.fields;
-            },
-            fileContent() {
-                return this.$store.state.fileContent;
+            files() {
+                return this.$store.state.files;
             },
         },
         created() {
-            if (this.$store.state.fields.length === 0) {
-                this.$store.commit('addNewField');
+            if (this.$store.state.files.length === 0) {
+                this.$store.commit('addNewFile');
             }
         },
         components: {

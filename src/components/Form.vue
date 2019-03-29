@@ -1,11 +1,11 @@
 <template>
     <form>
         <div class="fixed-length-fields-container">
-            <FixedLengthField v-for="(field, key) in fields" :key="key" :field="field" />
+            <FixedLengthField v-for="(field, key) in files[0].lines[0].fields" :key="key" :field="field" />
         </div>
         <button type="button" @click="addNewField">Añadir campo</button>
         <div>
-            <textarea cols="80" rows="10" :value="fileContent" @keyup="editFileContent"></textarea>
+            <textarea cols="80" rows="10" :value="files[0].content" @keyup="editFileContent"></textarea>
         </div>
     </form>
 </template>
@@ -16,8 +16,7 @@
     export default {
         name: 'Form',
         props: {
-            fields: Array,
-            fileContent: String,
+            files: Array,
         },
         methods: {
             addNewField() {
