@@ -23,7 +23,7 @@
         },
         created() {
             if (this.$store.state.files.length === 0) {
-                this.$store.commit('addNewFile');
+                this.$store.commit('createFile');
             }
         },
         components: {

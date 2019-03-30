@@ -16,26 +16,6 @@ export default new Vuex.Store({
         visibleFileKey: 0,
     },
     mutations: {
-        addNewFile(state) {
-            state.files.push({
-                name: 'Archivo 1',
-                lines: [
-                    {
-                        type: 'Línea 1',
-                        fields: [
-                            {
-                                id: uniqid(),
-                                name: 'Nombre del campo',
-                                startPosition: 1,
-                                size: 1,
-                            },
-                        ],
-                    },
-                ],
-                content: '',
-            });
-            save(state);
-        },
         createFile(state) {
             state.files.push({
                 name: 'Archivo',
