@@ -2,7 +2,7 @@
     <table>
         <thead>
             <tr>
-                <th v-for="(field, key) in files[0].lines[0].fields" :key="key">{{ field.name }}</th>
+                <th v-for="(field, key) in file.lines[0].fields" :key="key">{{ field.name }}</th>
             </tr>
         </thead>
         <tbody>
@@ -20,14 +20,14 @@
     export default {
         name: 'TableResult',
         props: {
-            files: Array,
+            file: Object,
         },
         computed: {
             lines() {
-                return this.files[0].content.split('\n')
+                return this.file.content.split('\n')
                     .filter(line => line)
                     .map(line => {
-                        return this.files[0].lines[0].fields.map(field => {
+                        return this.file.lines[0].fields.map(field => {
                             return line.substring(
                                 field.startPosition - 1,
                                 field.startPosition - 1 + field.size

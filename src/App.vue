@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <FileSelector :files="files" />
-    <Form :files="files" />
-    <TableResult :files="files" />
+    <FileSelector :files="files" :visibleFileKey="visibleFileKey" />
+    <Form :file="files[visibleFileKey]" />
+    <TableResult :file="files[visibleFileKey]" />
   </div>
 </template>
 
@@ -17,6 +17,9 @@
             files() {
                 return this.$store.state.files;
             },
+            visibleFileKey() {
+                return this.$store.state.visibleFileKey;
+            }
         },
         created() {
             if (this.$store.state.files.length === 0) {

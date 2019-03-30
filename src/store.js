@@ -13,6 +13,7 @@ export default new Vuex.Store({
         files: JSON.parse(localStorage.getItem('files')) || [],
         fields: JSON.parse(localStorage.getItem('fields')) || [],
         fileContent: localStorage.getItem('fileContent') || '',
+        visibleFileKey: 0,
     },
     mutations: {
         addNewFile(state) {
@@ -55,8 +56,11 @@ export default new Vuex.Store({
             });
             save(state);
         },
+        changeVisibleFile(state, fileKey) {
+            state.visibleFileKey = fileKey;
+        },
         addNewField(state) {
-            state.files[0].lines[0].fields.push({
+            state.files[state.visibleFileKey].lines[0].fields.push({
                 id: uniqid(),
                 name: 'Nombre del campo',
                 startPosition: 1,
@@ -65,21 +69,21 @@ export default new Vuex.Store({
             save(state);
         },
         editField(state, editedField) {
-            const index = state.files[0].lines[0].fields.findIndex(function(field) {
+            const index = state.files[state.visibleFileKey].lines[0].fields.findIndex(function(field) {
                 return field.id === editedField.id;
             });
-            state.files[0].lines[0].fields.splice(index, 1, editedField);
+            state.files[state.visibleFileKey].lines[0].fields.splice(index, 1, editedField);
             save(state);
         },
         deleteField(state, deletingField) {
-            const index = state.files[0].lines[0].fields.findIndex(function(field) {
+            const index = state.files[state.visibleFileKey].lines[0].fields.findIndex(function(field) {
                 return field.id === deletingField.id;
             });
-            state.files[0].lines[0].fields.splice(index, 1);
+            state.files[state.visibleFileKey].lines[0].fields.splice(index, 1);
             save(state);
         },
         editFileContent(state, fileContent) {
-            state.files[0].content = fileContent;
+            state.files[state.visibleFileKey].content = fileContent;
             save(state);
         },
     },
