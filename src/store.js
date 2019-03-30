@@ -11,8 +11,6 @@ function save(state) {
 export default new Vuex.Store({
     state: {
         files: JSON.parse(localStorage.getItem('files')) || [],
-        fields: JSON.parse(localStorage.getItem('fields')) || [],
-        fileContent: localStorage.getItem('fileContent') || '',
         visibleFileKey: 0,
     },
     mutations: {
