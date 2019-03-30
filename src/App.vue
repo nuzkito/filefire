@@ -1,11 +1,13 @@
 <template>
   <div id="app">
+    <FileSelector :files="files" />
     <Form :files="files" />
     <TableResult :files="files" />
   </div>
 </template>
 
 <script>
+    import FileSelector from './components/FileSelector.vue';
     import Form from './components/Form.vue';
     import TableResult from './components/TableResult.vue';
 
@@ -22,6 +24,7 @@
             }
         },
         components: {
+            FileSelector,
             Form,
             TableResult,
         },

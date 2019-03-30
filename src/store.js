@@ -35,6 +35,26 @@ export default new Vuex.Store({
             });
             save(state);
         },
+        createFile(state) {
+            state.files.push({
+                name: 'Archivo',
+                lines: [
+                    {
+                        type: 'Línea 1',
+                        fields: [
+                            {
+                                id: uniqid(),
+                                name: 'Nombre del campo',
+                                startPosition: 1,
+                                size: 1,
+                            },
+                        ],
+                    },
+                ],
+                content: '',
+            });
+            save(state);
+        },
         addNewField(state) {
             state.files[0].lines[0].fields.push({
                 id: uniqid(),
