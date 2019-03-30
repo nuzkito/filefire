@@ -3,7 +3,7 @@
         <span v-for="(file, key) in files" :key="key">
             <button v-if="key === visibleFileKey" disabled>{{ file.name }}</button>
             <button v-else @click="changeVisibleFile(key)">{{ file.name }}</button>
-            <button>x</button>
+            <button @click="deleteFile(key)">x</button>
             |
         </span>
         <button @click="createFile">Nuevo archivo</button>
@@ -23,6 +23,9 @@
             },
             changeVisibleFile(fileKey) {
                 this.$store.commit('changeVisibleFile', fileKey);
+            },
+            deleteFile(fileKey) {
+                this.$store.commit('deleteFile', fileKey);
             },
         },
     };

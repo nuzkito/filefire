@@ -59,6 +59,18 @@ export default new Vuex.Store({
         changeVisibleFile(state, fileKey) {
             state.visibleFileKey = fileKey;
         },
+        deleteFile(state, fileKey) {
+            state.files.splice(fileKey, 1);
+            save(state);
+
+            if (state.files.length === 0) {
+                this.commit('createFile');
+            }
+
+            if (fileKey === state.files.length) {
+                this.commit('changeVisibleFile', state.files.length - 1);
+            }
+        },
         addNewField(state) {
             state.files[state.visibleFileKey].lines[0].fields.push({
                 id: uniqid(),
