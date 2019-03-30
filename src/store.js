@@ -18,7 +18,7 @@ export default new Vuex.Store({
     mutations: {
         createFile(state) {
             state.files.push({
-                name: 'Archivo',
+                name: 'Sin nombre',
                 lines: [
                     {
                         type: 'Línea 1',
